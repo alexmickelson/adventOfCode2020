@@ -1,4 +1,4 @@
-from toboggan_navigation import read_map, count_trees_on_slope
+from toboggan_navigation import read_map, count_trees_on_slope, multiply_trees_hit_each_slope
 
 expected_map = [
     "..##.........##.........##.........##.........##.........##.......",
@@ -17,8 +17,20 @@ def test_read_map():
     assert read_map("example_map.txt") == expected_map
 
 def test_count_trees_on_slope():
-    assert count_trees_on_slope(expected_map, 3) == 7
+    assert count_trees_on_slope(expected_map, 1, 3) == 7
+    assert count_trees_on_slope(expected_map, 2, 3) == 2
 
 def test_do_part_one():
     map = read_map('actual_map.txt')
-    assert count_trees_on_slope(map, 3) == 0
+    assert count_trees_on_slope(map, 1, 3) == 289
+
+def test_check_trees_hit_pt_2():
+    map = read_map('actual_map.txt')
+    slopes = [
+        (1, 1),
+        (1, 3),
+        (1, 5),
+        (1, 7),
+        (2, 1),
+    ]
+    assert multiply_trees_hit_each_slope(map, slopes) == 5522401584
