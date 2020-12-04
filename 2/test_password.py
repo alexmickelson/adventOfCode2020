@@ -24,9 +24,13 @@ def test_password_rule_pass():
 
 def test_count_good_passwords():
     input_list = read_input('example.txt')
-    assert count_good_passwords(input_list) == 2
+    assert count_good_passwords(input_list) == 1
 
-def test_count_good_passwords_acutual():
+# def test_count_good_passwords_acutual_pt_1():
+#     input_list = read_input('actual.txt')
+#     assert count_good_passwords(input_list) == 396
+
+def test_count_good_passwords_acutual_pt_2():
     input_list = read_input('actual.txt')
-    assert count_good_passwords(input_list) == 396
+    assert count_good_passwords(input_list) == 428
     
