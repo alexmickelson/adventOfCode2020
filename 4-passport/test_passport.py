@@ -46,6 +46,9 @@ def test_count_valid_passports():
     passports = p.create_passport_list_from_file('example_passports.txt')
     assert p.count_valid_passports(passports) == 2
 
-def test_do_pt_1():
+# def test_do_pt_1():
+#     passports = p.create_passport_list_from_file('passports.txt')
+#     assert p.count_valid_passports(passports) == 245
+def test_do_pt_2():
     passports = p.create_passport_list_from_file('passports.txt')
-    assert p.count_valid_passports(passports) == 245
+    assert p.count_valid_passports(passports) == 133
