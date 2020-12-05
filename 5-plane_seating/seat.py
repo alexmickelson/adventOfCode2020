@@ -23,10 +23,24 @@ def get_seat_id(boarding_pass):
     column = columns[0]
     return (row * 8) + column
 
+def get_all_ids(boarding_passes):
+    return [get_seat_id(bp) for bp in boarding_passes]
+
 def get_highest_id(boarding_passes):
-    return max(get_seat_id(bp) for bp in boarding_passes)
+    return max(get_all_ids(boarding_passes))
+
+def get_missing_ids(boarding_passes):
+    all_ids = list(range(1024))
+    current_ids = get_all_ids(boarding_passes)
+    missing_ids = list(set(all_ids) - set(current_ids))
+    return missing_ids
 
 
 #part 1
 passes = read_passes('passes.txt')
 print("largest id: " + str(get_highest_id(passes)))
+
+#part 2
+
+print()
+print("missing ids: " + str(get_missing_ids(passes)))
