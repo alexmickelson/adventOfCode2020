@@ -33,5 +33,4 @@ if __name__ == "__main__":
     print('sum of answers: ' + str(answer_sum_counts(answers)))
 
     # part 2
-
     print('sum of common answers: ' + str(answer_sum_common_counts(answers)))
