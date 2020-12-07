@@ -34,3 +34,7 @@ if __name__ == "__main__":
 
     # part 2
     print('sum of common answers: ' + str(answer_sum_common_counts(answers)))
+
+    jonathan_answers = read_customs_file('jonathan-input.txt')
+    print(len(jonathan_answers))
+    print('sum of jonathan common answers: ' + str(answer_sum_common_counts(answers)))
