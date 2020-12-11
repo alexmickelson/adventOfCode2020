@@ -21,5 +21,5 @@ def test_run_until_stable():
     start = seating.read_seats('example.txt')
     final_seats = seating.iterate_until_stable(start)
     actual_filled_seats = seating.count_occupied_seats(final_seats)
-    assert actual_filled_seats == 37
+    assert actual_filled_seats == 26
 

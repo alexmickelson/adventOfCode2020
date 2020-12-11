@@ -6,19 +6,111 @@ from os import read
 def read_seats(file_name):
     return open(file_name).read().split('\n')
 
+def y_decrease_neighbor_is_occupied(x, y, seats):
+    y_target = y - 1
+    while(y_target >= 0):
+        if(seats[x][y_target] == "L"):
+            return False
+        if(seats[x][y_target] == "#"):
+            return True
+        y_target -= 1
+    return False
+
+def x_and_y_decrease_neighbor_is_occupied(x, y, seats):
+    y_target = y - 1
+    x_target = x - 1
+    while(y_target >= 0 and x_target >= 0):
+        if(seats[x_target][y_target] == "L"):
+            return False
+        if(seats[x_target][y_target] == "#"):
+            return True
+        y_target -= 1
+        x_target -= 1
+    return False
+
+def x_increase_and_y_decrease_neighbor_is_occupied(x, y, seats):
+    y_target = y - 1
+    x_target = x + 1
+    while(y_target >= 0 and x_target < len(seats)):
+        if(seats[x_target][y_target] == "L"):
+            return False
+        if(seats[x_target][y_target] == "#"):
+            return True
+        y_target -= 1
+        x_target += 1
+    return False
+
+
+
+
+
+def y_increase_neighbor_is_occupied(x, y, seats):
+    y_target = y + 1
+    while(y_target < len(seats[x])):
+        if(seats[x][y_target] == "L"):
+            return False
+        if(seats[x][y_target] == "#"):
+            return True
+        y_target += 1
+    return False
+
+def x_and_y_increase_neighbor_is_occupied(x, y, seats):
+    y_target = y + 1
+    x_target = x - 1
+    while(y_target < len(seats[x]) and x_target >= 0):
+        if(seats[x_target][y_target] == "L"):
+            return False
+        if(seats[x_target][y_target] == "#"):
+            return True
+        y_target += 1
+        x_target -= 1
+    return False
+
+def x_increase_and_y_increase_neighbor_is_occupied(x, y, seats):
+    y_target = y + 1
+    x_target = x + 1
+    while(y_target < len(seats[x]) and x_target < len(seats)):
+        if(seats[x_target][y_target] == "L"):
+            return False
+        if(seats[x_target][y_target] == "#"):
+            return True
+        y_target += 1
+        x_target += 1
+    return False
+
+
+
+def x_increase_neighbor_is_occupied(x, y, seats):
+    x_target = x + 1
+    while(x_target < len(seats)):
+        if(seats[x_target][y] == "L"):
+            return False
+        if(seats[x_target][y] == "#"):
+            return True
+        x_target += 1
+    return False
+
+def x_decrease_neighbor_is_occupied(x, y, seats):
+    x_target = x - 1
+    while(x_target >= 0):
+        if(seats[x_target][y] == "L"):
+            return False
+        if(seats[x_target][y] == "#"):
+            return True
+        x_target -= 1
+    return False
+
 def count_neighbors(x, y, seats):
-    x_min = x-1 if x != 0 else 0
-    y_min = y-1 if y != 0 else 0
-    x_max = x+1 if x != len(seats)-1 else len(seats)-1
-    y_max = y+1 if y != len(seats[0])-1 else len(seats[0])-1
-    count = 0
-    for i in range(x_min, x_max + 1):
-        for j in range(y_min, y_max + 1):
-            if(seats[i][j] == "#"):
-                count += 1
-    if(seats[x][y] == "#"):
-        count -= 1
-    return count
+    return sum([
+        y_decrease_neighbor_is_occupied(x, y, seats),
+        y_increase_neighbor_is_occupied(x, y, seats),
+        x_and_y_decrease_neighbor_is_occupied(x, y, seats),
+        x_and_y_increase_neighbor_is_occupied(x, y, seats),
+        x_increase_and_y_decrease_neighbor_is_occupied(x, y, seats),
+        x_increase_and_y_increase_neighbor_is_occupied(x, y, seats),
+        x_decrease_neighbor_is_occupied(x, y, seats),
+        x_increase_neighbor_is_occupied(x, y, seats),
+    ])
 
 def one_round(seats):
     next_round = [ '' for row in seats]
@@ -30,7 +122,7 @@ def one_round(seats):
                 else:
                     next_round[i] += "L"
             elif(seats[i][j] == "#"):
-                if(count_neighbors(i, j, seats) >= 4):
+                if(count_neighbors(i, j, seats) >= 5):
                     next_round[i] += "L"
                 else:
                     next_round[i] += "#"
