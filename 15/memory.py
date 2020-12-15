@@ -1,8 +1,3 @@
-# import sys
-
-
-# sys.setrecursionlimit(30_000_002)
-
 def read_starting_numbers(file_name):
     return [int(i) for i in open(file_name).read().replace('\n', '').split(',')]
 
