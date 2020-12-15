@@ -5,7 +5,6 @@ def get_next_number(numbers, previous_number, previous_number_count):
     last_occurence_count = numbers.get(previous_number, previous_number_count)
     return previous_number_count - last_occurence_count
 
-
 def get_number_at_count(count, previous_numbers):
     numbers = {number: i+1 for i, number in enumerate(previous_numbers)}
     previous_number = previous_numbers[-1]
